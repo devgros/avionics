@@ -1,0 +1,70 @@
+<div class="aprs">
+	<table class="table table-aprs table-bordered">
+		<tr>
+			<td class="text-center v-align-middle" >{{ entity.appareil.immatriculation }}</td>
+			<td class="text-center"><b>HT:</b><br/>{{ entity.appareil.htCellule }}</td>
+			<td class="text-center"><b>Horamètre:</b><br/>{{ entity.horametreAprs }}</td>
+		</tr>
+		<tr>
+			<td class="text-right"><b>BC:</b><br/><b>BL:</b></td>
+			<td colspan="2" class="text-center">{{ entity.numBc }}<br/>{{ entity.numBl }}</td>
+		</tr>
+		<tr>
+			<td colspan="3" class="text-center">
+				<b>{{ entity.titre }}</b>
+				<div class="notice">
+				{% if entity.travaux|length() > 0 %}
+				{% set first_travaux = true %}
+				{% for travaux in entity.travaux %}
+					{% if travaux.statut == 5 %}
+						{% if first_travaux %}<b>Travaux reporté : </b>{% endif %}
+						{% if not first_travaux %}, {% endif %}{{ travaux.designation }}
+					{% endif %}
+					{% set first_travaux = false %}
+				{% endfor %}
+				{% endif %}
+				{% if entity.cnad|length() > 0 %}
+				{% set first_cnad = true %}
+				{% for cnad in entity.cnad %}
+					{% if cnad.statut == 5 %}
+						{% if first_cnad %}
+							<br/><b>CN/AD reporté : </b>
+						{% endif %}
+						{% if not first_cnad %}, {% endif %}
+						{{ cnad.designation }}
+					{% endif %}
+					{% set first_cnad = false %}
+				{% endfor %}
+				{% endif %}
+				</div>
+
+				<div class="notice">Certifie que les travaux spécifiés ont été réalisés conformement à la PART ML et que au vue de ces travaux, l'aéronef est consideré prêt à la remise en service.
+				{% if entity.isValidCtrlOk %}
+				<b>Sous réserve de l’exécution satisfaisante du vol de contrôle</b>
+				{% else %}
+				Sauf indication contraire.
+				{% endif %}
+				</div>
+				<b>AIX AVIONICS</b><br/>
+				<div class="notice">
+					{% if entity.mecanicien %}
+						{{ entity.mecanicien }}<br/>
+						{{ entity.mecanicien.licence }}
+					{% else %}
+						<span contenteditable="true">Dave PAULHIAC</span><br/>
+						<span contenteditable="true">FR.66.??????</span>
+					{% endif %}
+				</div>
+
+				<img src="{{ qr_code_data_uri(url) }}" />
+		</tr>
+		<tr>
+			<td colspan="2"><b>Lieu:</b><br/><b>Date:</b><br/><b>Heure:</b></td>
+			<td>
+				{% if entity.lieuCf %}{{ entity.lieuCf }}{% else %}<span contenteditable="true">Les milles</span>{% endif %}<br/>
+				{% if entity.dateCf %}{{ entity.dateCf|date("d/m/Y") }}{% else %}<span contenteditable="true">{{ "now"|date("d/m/Y") }}</span>{% endif %}<br/>
+				{% if entity.timeCf %}{{ entity.timeCf|slice(0, 5) }}{% else %}<span contenteditable="true">{{ "now"|date("H:i") }}</span>{% endif %}
+			</td>
+		</tr>
+	</table>
+</div>

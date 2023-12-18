@@ -1,0 +1,15 @@
+framework:
+    templating:
+        engines: twig
+    secret: '%env(APP_SECRET)%'
+    default_locale: fr
+    csrf_protection: ~
+    #http_method_override: true
+
+    session:
+        handler_id: ~
+
+    #esi: ~
+    #fragments: ~
+    php_errors:
+        log: true

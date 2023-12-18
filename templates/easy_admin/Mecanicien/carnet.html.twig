@@ -1,0 +1,21 @@
+{% extends '@EasyAdmin/default/list.html.twig' %}
+
+{% block content_header %}
+    <div class="row">
+        <div class="col-sm-12">
+            {% block content_title_wrapper %}
+                <h1 class="title">{% spaceless %}Carnet de mécanicien de {{ entity }} ({{entity.trigramme}}){% endspaceless %}
+                	<span class="pull-right">
+				        <div class="btn-group">
+				            <a href="{{ path('easyadmin', { action: 'export', entity: 'Mecanicien', id: id }) }}" class="btn btn-info" target="blank"><i class="fa fa-download"></i> Export</a>
+				        </div>
+				    </span>
+                </h1>
+            {% endblock %}
+        </div>
+    </div>
+{% endblock content_header %}
+
+{% block main %}
+	{% include  'easy_admin/Mecanicien/include_carnet.html.twig' with {'entity': entity, 'items': items, pdf: false } %}
+{% endblock %}

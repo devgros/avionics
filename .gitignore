@@ -1,0 +1,24 @@
+
+###> symfony/framework-bundle ###
+.env
+/public/bundles/
+/public/dossier/
+/public/dossier_final/
+/public/facture/
+/public/carnet_mecanicien/
+/public/devis/
+/public/avoir/
+/public/uploads/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###

@@ -1,0 +1,96 @@
+imports:
+    - { resource: easy_admin/dossier.yaml }
+    - { resource: easy_admin/dossier_travaux.yaml }
+    - { resource: easy_admin/dossier_cnad.yaml }
+    - { resource: easy_admin/dossier_travaux_sup.yaml }
+    - { resource: easy_admin/dossier_main_oeuvre.yaml }
+    - { resource: easy_admin/dossier_frais_port.yaml }
+    - { resource: easy_admin/dossier_frais_certif.yaml }
+    - { resource: easy_admin/dossier_article.yaml }
+    - { resource: easy_admin/dossier_article_externe.yaml }
+    - { resource: easy_admin/dossier_outils.yaml }
+    - { resource: easy_admin/devis.yaml }
+    - { resource: easy_admin/devis_article.yaml }
+    - { resource: easy_admin/article_externe.yaml }
+    - { resource: easy_admin/frais_port.yaml }
+    - { resource: easy_admin/frais_certif.yaml }
+    - { resource: easy_admin/devis_main_oeuvre.yaml }
+    - { resource: easy_admin/devis_frais_port.yaml }
+    - { resource: easy_admin/devis_frais_certif.yaml }
+    - { resource: easy_admin/facture.yaml }
+    - { resource: easy_admin/client.yaml }
+    - { resource: easy_admin/appareil.yaml }
+    - { resource: easy_admin/programme_entretien.yaml }
+    - { resource: easy_admin/amm_cellule.yaml }
+    - { resource: easy_admin/amm_moteur.yaml }
+    - { resource: easy_admin/outillage.yaml }
+    - { resource: easy_admin/outillage_prix.yaml }
+    - { resource: easy_admin/outillage_certificat.yaml }
+    - { resource: easy_admin/article.yaml }
+    - { resource: easy_admin/article_prix.yaml }
+    - { resource: easy_admin/article_marge.yaml }
+    - { resource: easy_admin/article_formone.yaml }
+    - { resource: easy_admin/mecanicien.yaml }
+    - { resource: easy_admin/main_oeuvre.yaml }
+    - { resource: easy_admin/main_oeuvre_prix.yaml }
+    - { resource: easy_admin/todo.yaml }
+    - { resource: easy_admin/compressiometre.yaml }
+
+easy_admin:
+    site_name: "Aix Avionics"
+
+    design:
+        brand_color: '#00BFFF'
+        color_scheme: 'dark'
+        form_theme: 'easy_admin/custom_layout.html.twig'
+        assets:
+            css:
+                - '/public/css/global.css'
+            js:
+        menu:
+            - { label: 'Gestion' }
+            - { entity: 'Dossier', label: 'Dossiers', icon: 'folder-open', params: { 'filters[entity.statut]': '0' } }
+            - { entity: 'Devis', label: 'Pro format', icon: 'calculator', params: { 'filters[entity.statut]': '0' }, role: ROLE_SUPER_ADMIN }
+            - { entity: 'Facture', label: 'Factures', icon: 'euro', role: ROLE_SUPER_ADMIN }
+            - { entity: 'Todo', label: 'Notes', icon: 'sticky-note', role: ROLE_SUPER_ADMIN }
+            - { label: 'Inventaire', role: ROLE_SUPER_ADMIN }
+            - { entity: 'Article', label: 'Stock', icon: 'tags', role: ROLE_SUPER_ADMIN }
+            - { entity: 'MainOeuvre', label: "Main d'oeuvre", icon: 'wrench', role: ROLE_SUPER_ADMIN }
+            - { label: 'Clients', role: ROLE_SUPER_ADMIN }
+            - { entity: 'Client', label: 'Clients', icon: 'address-book', role: ROLE_SUPER_ADMIN }
+            - { entity: 'Appareil', label: 'Appareils', icon: 'plane', role: ROLE_SUPER_ADMIN }
+            - { label: "Atelier", role: ROLE_SUPER_ADMIN }
+            - { entity: 'Outillage', label: 'Outillages', icon: 'gears', role: ROLE_SUPER_ADMIN }
+            - { entity: 'Mecanicien', label: 'Mécaniciens', icon: 'users', role: ROLE_SUPER_ADMIN }
+            - { label: "Historique inventaire", role: ROLE_SUPER_ADMIN }
+            - { entity: 'ArticleSuppr', label: 'Ancien stock', icon: 'tags', role: ROLE_SUPER_ADMIN }
+            - { entity: 'MainOeuvreSuppr', label: "Ancienne main d'oeuvre", icon: 'wrench', role: ROLE_SUPER_ADMIN }
+
+
+
+
+    list:
+        actions:
+            - { name: 'show', icon: 'search', label: false }
+            - { name: 'edit', icon: 'pencil', label: false }
+            - { name: 'delete', icon: 'times', label: false }
+
+endroid_qr_code:
+    writer: 'png'
+    size: 100
+    margin: 0
+    foreground_color: { r: 0, g: 0, b: 0 }
+    background_color: { r: 255, g: 255, b: 255 }
+    error_correction_level: low # low, medium, quartile or high
+    encoding: UTF-8
+    label: ""
+    label_font_size: 20
+    label_alignment: left # left, center or right
+    label_margin: { b: 20 }
+    #logo_path: '%kernel.root_dir%/../vendor/endroid/qr-code/assets/images/symfony.png'
+    logo_width: 100
+    validate_result: false # checks if the result is readable
+
+
+easy_admin_extension:
+    minimum_role: ROLE_ADMIN

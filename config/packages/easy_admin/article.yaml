@@ -1,0 +1,81 @@
+easy_admin:
+    entities:
+        Article:
+            class: App\Entity\Article
+            controller: App\Controller\ArticleController
+            disabled_actions: ['delete']
+            list:
+                role: ROLE_SUPER_ADMIN
+                max_results: 40
+                title: "Stock"
+                fields:
+                    - { property: 'nom', label: 'Désignation'}
+                    - { property: 'pn', label: 'Pn'}
+                    - { property: 'last_prix', label: 'Prix Ht (€)', css_class: 'text-right'}
+                    - { property: 'last_marge', label: 'Marge (%)', css_class: 'text-right' }
+                    - { property: 'quantite', label: 'Quantité', css_class: 'text-right'}
+                    - { property: 'seuil_alert', label: "Seuil d'alerte", css_class: 'text-right'}
+                actions:
+                    - { name: 'addFormone', icon: 'plus-circle', label: "FormOne" }
+                    - { name: 'show', icon: 'search', label: false }
+                    - { name: 'edit', icon: 'pencil', label: false }
+                    - { name: 'deleted', icon: 'times', label: false, css_class: 'text-danger' }
+                dql_filter: 'entity.deleted = 0'
+            show:
+                role: ROLE_SUPER_ADMIN
+                title: "Stock"
+                fields:
+                    - { property: 'nom', label: "Désignation", css_class: 'col-sm-6'}
+                    - { property: 'pn', label: 'Pn', css_class: 'col-sm-6'}
+                    - { property: 'last_prix', label: "Prix Ht (€)", css_class: 'col-sm-6'}
+                    - { property: 'last_marge', label: "Marge (%)", css_class: 'col-sm-6'}
+                    - { property: 'quantite', label: "Quantité total", css_class: 'col-sm-6'}
+                    - { property: 'seuil_alert', label: "Seuil d'alerte", css_class: 'col-sm-6'}
+                    - { property: 'article_prix', label: 'Historique des prix', css_class: 'new-row col-sm-6', template: 'list_article_prix.html.twig'}
+                    - { property: 'article_marge', label: 'Historique des marges', css_class: 'col-sm-6', template: 'list_article_marge.html.twig'}
+                    - { property: 'article_formone', label: 'Form one', css_class: 'new-row col-sm-12', template: 'list_formone.html.twig'}
+                actions:
+                    - { name: 'addFormone', icon: 'plus-circle', label: "FormOne", css_class: 'btn btn-secondary' }
+            form:
+                role: ROLE_SUPER_ADMIN
+                title: "Ajouter un article au stock"
+                fields:
+                    - { type: 'group', css_class: 'col-sm-12', label: '', background: 'box-primary' }
+                    - { property: 'pn', label: 'Pn', css_class: 'col-sm-6'}
+                    - { property: 'nom', label: 'Désignation', css_class: 'col-sm-6'}
+                    - { property: 'prix_ht', label: 'Prix HT', type: 'text', type_options: { required: true }, css_class: 'col-sm-6'}
+                    - { property: 'marge', label: 'Marge', css_class: 'col-sm-6'}
+                    - { property: 'seuil_alert', label: "Seuil d'alerte", type_options: { attr: {min: '0' }}, css_class: 'col-sm-6'}
+            edit:
+                role: ROLE_SUPER_ADMIN
+                title: "Modifier un article du stock"
+            new:
+                role: ROLE_SUPER_ADMIN
+            delete:
+                role: ROLE_SUPER_ADMIN
+
+        ArticleSuppr:
+            class: App\Entity\Article
+            controller: App\Controller\ArticleController
+            disabled_actions: ['new', 'edit', 'show', 'delete']
+            list:
+                role: ROLE_SUPER_ADMIN
+                max_results: 40
+                title: "Article retiré du stock"
+                fields:
+                    - { property: 'nom', label: 'Désignation'}
+                    - { property: 'pn', label: 'Pn'}
+                    - { property: 'deletedAt', label: 'Date de retrait du stock', format: 'd/m/Y'}
+                actions:
+                    - { name: 'undeleted', icon: 'plus-circle', label: "Remettre au stock", css_class: 'text-success' }
+                dql_filter: 'entity.deleted = 1'
+            show:
+                role: ROLE_SUPER_ADMIN
+            form:
+                role: ROLE_SUPER_ADMIN
+            edit:
+                role: ROLE_SUPER_ADMIN
+            new:
+                role: ROLE_SUPER_ADMIN
+            delete:
+                role: ROLE_SUPER_ADMIN
