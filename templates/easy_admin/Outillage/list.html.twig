@@ -26,13 +26,14 @@
 					{% else %}
 					<span class="label label-danger">L'outillage n'a pas de certificat de validité, il faut en ajouter 1</span>
 					{% endif %}
-					
+
 				</div>
 				<div class="box-body no-padding">
+					<table style="background:none; border:none;"><tr data-id="{{ _item_id }}" style="background:none;"><td  class="actions" style="border:none;">
 					<div class="action-box">
 						{% if _list_item_actions|length > 0 %}
                         {% set _column_label =  'list.row_actions'|trans(_trans_parameters, 'EasyAdminBundle') %}
-                        
+
                         {% block item_actions %}
                             {{ include('@EasyAdmin/default/includes/_actions.html.twig', {
                                 actions: _list_item_actions,
@@ -44,6 +45,7 @@
                         {% endblock item_actions %}
                     	{% endif %}
 					</div>
+					</td></tr></table>
 					<ul class="nav nav-stacked nav-box">
 						<li>Type <span class="pull-right">{{ type_outillage_label[item.type] }}</span></a></li>
 						<li>Sn <span class="pull-right">{{ item.sn }}</span></a></li>

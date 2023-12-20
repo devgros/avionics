@@ -6,13 +6,15 @@
 	<div class="row">
 	{% for item in paginator.currentPageResults %}
 		{% set _item_id = '' ~ attribute(item, _entity_config.primary_key_field_name) %}
+
 		<div class="col-sm-6 {% if loop.index is even %}no_pad_left{% endif %}">
 			<div class="box box-widget widget-user-2">
 				<div class="widget-user-header bg-green">
 					<div class="action-block">
+					<table style="background:none; border:none;"><tr data-id="{{ _item_id }}" style="background:none;">
 					{% if _list_item_actions|length > 0 %}
                         {% set _column_label =  'list.row_actions'|trans(_trans_parameters, 'EasyAdminBundle') %}
-                        
+						<td data-label="{{ _column_label }}" class="actions" style="border:none;">
                         {% block item_actions %}
                             {{ include('@EasyAdmin/default/includes/_actions.html.twig', {
                                 actions: _list_item_actions,
@@ -22,8 +24,9 @@
                                 item_id: _item_id
                             }, with_context = false) }}
                         {% endblock item_actions %}
-                        
+						</td>
                     {% endif %}
+					</tr></table>
                     </div>
 					<div class="widget-user-image">
 						<img src="{{ vich_uploader_asset(item, 'signatureFile', 'App\\Entity\\Mecanicien') }}" alt="User Avatar">

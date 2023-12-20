@@ -22,13 +22,14 @@
 					</div>
 					<h3 class="widget-user-username"> {{ item.nom}}</h3>
 					<h5 class="widget-user-desc">prix HT: <b>{{ item.getLastPrix }} €</b></h5>
-					
+
 				</div>
 				<div class="box-body no-padding">
+					<table style="background:none; border:none;"><tr data-id="{{ _item_id }}" style="background:none;"><td  class="actions" style="border:none;">
 					<div class="action-box">
 						{% if _list_item_actions|length > 0 %}
                         {% set _column_label =  'list.row_actions'|trans(_trans_parameters, 'EasyAdminBundle') %}
-                        
+
                         {% block item_actions %}
                             {{ include('@EasyAdmin/default/includes/_actions.html.twig', {
                                 actions: _list_item_actions,
@@ -40,6 +41,7 @@
                         {% endblock item_actions %}
                     	{% endif %}
 					</div>
+					</td></tr></table>
 					<ul class="nav nav-stacked nav-box">
 						{% if item.mainOeuvrePrix|length > 0 %}
 						{% for main_oeuvre_prix in item.mainOeuvrePrix %}
@@ -49,7 +51,7 @@
 						{% endif %}
 					</ul>
 				</div>
-				
+
 			</div>
 		</div>
 	{% endfor %}

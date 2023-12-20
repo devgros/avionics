@@ -11,13 +11,13 @@ easy_admin:
                     - { name: 'edit', icon: 'pencil', label: 'Modifier', css_class: 'btn btn-secondary ' }
                     - { name: 'deleted', icon: 'times', label: 'Retirer', css_class: 'btn btn-secondary text-danger' }
                     #- { name: 'delete', icon: 'times', label: 'Supprimer', css_class: 'btn btn-secondary text-danger' }
-                fields: 
+                fields:
                     - { property: 'nom', label: 'Désignation'}
                     - { property: 'last_prix', label: 'Prix Ht (€)', css_class: 'text-right'}
                 dql_filter: 'entity.deleted = 0'
             show:
                 role: ROLE_SUPER_ADMIN
-                fields: 
+                fields:
                     - { property: 'nom', label: "Désignation", css_class: 'col-sm-6'}
                     - { property: 'last_prix', label: "Prix Ht (€)", css_class: 'col-sm-6'}
                     - { property: 'main_oeuvre_prix', label: 'Historique des prix', css_class: 'col-sm-6', template: 'list_article_prix.html.twig'}
@@ -44,7 +44,7 @@ easy_admin:
                 role: ROLE_SUPER_ADMIN
                 max_results: 40
                 title: "Main d'oeuvre retiré"
-                fields: 
+                fields:
                     - { property: 'nom', label: 'Désignation'}
                     - { property: 'deletedAt', label: 'Date de retrait', format: 'd/m/Y'}
                 actions:
