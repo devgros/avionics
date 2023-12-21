@@ -93,6 +93,10 @@ class DossierController extends MyAdminController
 
     protected function addAPRSTime($ht, $heure_aprs)
     {
+		$heure_aprs_float = floatval($heure_aprs);
+		if ($heure_aprs_float == intval($heure_aprs_float)) {
+		    $heure_aprs .= '.00';
+		}
     	list($htH,$htM) = explode('.',$ht);
     	list($haprsH,$haprsM) = explode('.',$heure_aprs);
     	$HT = $htH+$haprsH;
