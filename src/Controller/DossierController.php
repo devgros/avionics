@@ -30,12 +30,12 @@ class DossierController extends MyAdminController
 	protected function prePersistEntity($entity)
 	{
 		$last_dossier =  $this->em->getRepository('App:Dossier')->getLastDossier();
-
+		$current_year = date("y");
 		if(sizeof($last_dossier)>0){
 			$last_num_dossier = $last_dossier[0]->getNumBl();
 			$last_num = substr($last_num_dossier, 0, 3);
 			$last_year = substr($last_num_dossier, 4, 2);
-			$current_year = date("y");
+
 			if($current_year > $last_year){
 				$new_num = "001-".$current_year."-AVIONICS";
 			}else{
