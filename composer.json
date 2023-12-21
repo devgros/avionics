@@ -11,7 +11,6 @@
         "endroid/qr-code-bundle": "^3.1",
         "friendsofsymfony/user-bundle": "dev-master",
         "knplabs/knp-snappy-bundle": "^1.5",
-        "rguedes/pdfmerger": "^1.0",
         "sensio/framework-extra-bundle": "^5.4",
         "stof/doctrine-extensions-bundle": "^1.3",
         "swiftmailer/swiftmailer": "*",
@@ -25,7 +24,8 @@
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/yaml": "4.4.*",
-        "vich/uploader-bundle": "^1.8"
+        "tomsgu/pdf-merger-bundle": "^0.5.1",
+        "vich/uploader-bundle": "1.10.*"
     },
     "require-dev": {
         "symfony/dotenv": "4.4.*",
@@ -54,8 +54,7 @@
     "autoload-dev": {
         "psr-4": {
             "App\\Tests\\": "tests/"
-        },
-        "classmap": ["vendor/rguedes/pdfmerger/Classes/", "vendor/rguedes/pdfmerger/Classes/PDFMerger.php"]
+        }
     },
     "replace": {
         "symfony/polyfill-iconv": "*",

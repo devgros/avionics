@@ -23,6 +23,10 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Tomsgu\PdfMerger\PdfMerger;
+use Tomsgu\PdfMerger\PdfFile;
+use Tomsgu\PdfMerger\PdfCollection;
+use setasign\Fpdi\Fpdi;
 
 
 class DossierController extends MyAdminController
@@ -217,43 +221,45 @@ class DossierController extends MyAdminController
             $this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRI.pdf'
         );
 
-        $pdf = new \PDFMerger();
+		$pdfCollection = new PdfCollection();
 
         if($entity->getScanBc()){
-			$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($entity, 'scanBcFile'), 'all');
+			$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($entity, 'scanBcFile'), PdfFile::ALL_PAGES);
 		}
-        $pdf->addPDF($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRI.pdf', 'all');
-		$pdf->addPDF($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRS.pdf', 'all');
-		$pdf->addPDF($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_APRS.pdf', 'all');
+        $pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRI.pdf', PdfFile::ALL_PAGES);
+		$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRS.pdf', PdfFile::ALL_PAGES, PdfFile::ORIENTATION_LANDSCAPE);
+		$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_APRS.pdf', PdfFile::ALL_PAGES);
 
 		foreach($entity->getTravaux() as $travaux){
 			if($travaux->getCarteTravailTravaux()){
-				$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($travaux, 'carteTravailTravauxFile'), 'all');
+				$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($travaux, 'carteTravailTravauxFile'), PdfFile::ALL_PAGES);
 			}
 		}
 
 		foreach($entity->getCnad() as $cnad){
 			if($cnad->getCarteTravailCnad()){
-				$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($cnad, 'carteTravailCnadFile'), 'all');
+				$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($cnad, 'carteTravailCnadFile'), PdfFile::ALL_PAGES);
 			}
 		}
 
 		foreach($entity->getTravauxSup() as $travaux_sup){
 			if($travaux_sup->getCarteTravailTravauxSup()){
-				$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($travaux_sup, 'carteTravailTravauxSupFile'), 'all');
+				$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($travaux_sup, 'carteTravailTravauxSupFile'), PdfFile::ALL_PAGES);
 			}
 		}
 
 		if($entity->getCarteTravail()){
-			$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($entity, 'carteTravailFile'), 'all');
+			$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($entity, 'carteTravailFile'), PdfFile::ALL_PAGES);
 		}
 		foreach($entity->getDossierArticle() as $article){
 			if($article->getArticleFormone()->getFormone()){
-				$pdf->addPDF($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($article->getArticleFormone(), 'formoneFile'), 'all');
+				$pdfCollection->addPdf($this->container->get('kernel')->getProjectDir().$this->get("vich_uploader.templating.helper.uploader_helper")->asset($article->getArticleFormone(), 'formoneFile'), PdfFile::ALL_PAGES);
 			}
 		}
 
-		$pdf->merge('file', $this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'.pdf');
+		$fpdi = new Fpdi();
+		$merger = new PdfMerger($fpdi);
+		$merger->merge($pdfCollection, $this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'.pdf', PdfMerger::MODE_FILE);
 
 		unlink($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRI.pdf');
 		unlink($this->container->get('kernel')->getProjectDir().'/public/dossier/'.$entity->getNumBl().'_CRS.pdf');
