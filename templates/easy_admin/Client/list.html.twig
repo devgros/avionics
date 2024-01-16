@@ -38,9 +38,11 @@
 					</div>
 					</td></tr></table>
 					<ul class="nav nav-stacked nav-box">
-						<li>Email <span class="pull-right"><a href="mailto:{{ item.email }}">{{ item.email }}</a></span></a></li>
-						<li>Téléphone <span class="pull-right">{{ item.tel }}</span></a></li>
-						<li>Adresse <span class="pull-right">{{ item.getAdresseComplete }}</span></a></li>
+						<li>Email <span class="pull-right"><a href="mailto:{{ item.email }}">{{ item.email }}</a></span></li>
+						<li>Téléphone <span class="pull-right">{{ item.tel }}</span></li>
+					<li>Adresse <span class="pull-right">{{ item.getAdresseComplete }} {% if item.pays is not null %}{{ item.pays }}{% endif %}</span>
+
+						</li>
 						{% if item.appareils|length() > 0 %}
 						{% for appareil in item.appareils %}
 						<li>{% if loop.first %}Appareils{% else %}&nbsp;{% endif %} <span class="pull-right"><a href="{{ path('easyadmin', { action: "show", entity: "Appareil", id: appareil.id }) }}"><i class="fa fa-plane"></i> {{ appareil }}</a></span>
