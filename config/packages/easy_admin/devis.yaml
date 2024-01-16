@@ -44,6 +44,9 @@ easy_admin:
                     - { property: 'commentaire', label: "Observation", css_class: 'col-sm-12'}
                     - { property: 'is_tva_intra', label: "TVA intracommunautaire", css_class: 'col-sm-6'}
                     - { property: 'num_tva_intra', label: "Numéro de TVA intracommunautaire", css_class: 'col-sm-6'}
+                    - { property: 'is_no_tva', label: "TVA non applicable (hors UE ou COM)", css_class: 'col-sm-4'}
+                    - { property: 'is_exo_tva', label: "Exonération de TVA (DROM HT)", css_class: 'col-sm-4'}
+                    - { property: 'is_8_5_tva', label: "TVA au taux ultramarin (8.5%)", css_class: 'col-sm-4'}
             edit:
                 role: ROLE_SUPER_ADMIN
                 title: "Modifier un Pro format"

@@ -124,6 +124,21 @@ class Devis
      */
     private $num_tva_intra;
 
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_no_tva;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_exo_tva;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $is_8_5_tva;
+
     public function __toString()
     {
         return $this->num_devis;
@@ -757,6 +772,42 @@ class Devis
     public function setNumTvaIntra(?string $num_tva_intra): self
     {
         $this->num_tva_intra = $num_tva_intra;
+
+        return $this;
+    }
+
+    public function getIsNoTva(): ?bool
+    {
+        return $this->is_no_tva;
+    }
+
+    public function setIsNoTva(?bool $is_no_tva): self
+    {
+        $this->is_no_tva = $is_no_tva;
+
+        return $this;
+    }
+
+    public function getIsExoTva(): ?bool
+    {
+        return $this->is_exo_tva;
+    }
+
+    public function setIsExoTva(?bool $is_exo_tva): self
+    {
+        $this->is_exo_tva = $is_exo_tva;
+
+        return $this;
+    }
+
+    public function getIs85Tva(): ?bool
+    {
+        return $this->is_8_5_tva;
+    }
+
+    public function setIs85Tva(?bool $is_8_5_tva): self
+    {
+        $this->is_8_5_tva = $is_8_5_tva;
 
         return $this;
     }

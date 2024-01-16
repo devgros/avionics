@@ -4,7 +4,42 @@
 
 {% block body %}
 <body class="hold-transition login-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6 col-md-offset-3" style="color:dimgrey;">
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <img src="{{ app.request.scheme ~'://' ~ app.request.httpHost}}/img/logo_moyen.png" /><br/><br/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6 text-center">
+                        <span style="font-size:20px;"><span style="font-size:24px;">BROS B</span>ENOIT</span><br/>
+                        <span style="font-size:16px;">06.88.21.11.59</span><br/><br/>
+                    </div>
+                    <div class=" col-md-6 text-center">
+                        <span style="font-size:20px;"><span style="font-size:24px;">PAULHIAC D</span>AVE</span><br/>
+                        <span style="font-size:16px;">06.03.87.43.77</span><br/><br/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 text-center">
+                        <a href="mailto:aixavionics@gmail.com" class="text-info">
+                            <span style="font-size:18px;"><span style="font-size:24px;">A</span>IXAVIONICS@GMAIL.COM</span>
+                        </a><br/>
+                        <h1 style="font-size:22px;">
+                            <span style="font-size:28px;">A</span>ERODROME <span style="font-size:28px;">A</span>IX <span style="font-size:28px;">L</span>ES <span style="font-size:28px;">M</span>ILLES<br/>
+                            <span style="font-size:28px;">LFMA</span>
+                        </h1></br>
+                        <u class="text-primary">TROUBLESHOOTING - CONSULTING - MODIFICATION</u>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row text-center" style ="width:360px;">
+        <br/>
 
-    <div class="text-center"><img src="{{ app.request.scheme ~'://' ~ app.request.httpHost}}/img/logo_moyen.png" style="margin-top:50px;"  /></div>
+    </div>
 </body>
 {% endblock body %}

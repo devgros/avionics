@@ -11,6 +11,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Client
 {
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -60,6 +61,11 @@ class Client
     private $ville;
 
     /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $pays;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Appareil", mappedBy="client")
      */
     private $appareils;
@@ -84,6 +90,7 @@ class Client
         $this->appareils = new ArrayCollection();
         $this->devis = new ArrayCollection();
         $this->todos = new ArrayCollection();
+        $this->pays = 'France';
     }
 
     public function __toString()
@@ -291,6 +298,30 @@ class Client
     public function getVille()
     {
         return $this->ville;
+    }
+
+    /**
+     * Set pays.
+     *
+     * @param string $pays
+     *
+     * @return Client
+     */
+    public function setPays($pays)
+    {
+        $this->pays = $pays;
+
+        return $this;
+    }
+
+    /**
+     * Get pays.
+     *
+     * @return string
+     */
+    public function getPays()
+    {
+        return $this->pays;
     }
 
     /**

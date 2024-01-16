@@ -58,6 +58,12 @@
 	</div>
 </div>
 
+{% if entity.devis.is85Tva %}
+	{% set taux_tva = 8.5 %}
+{% else %}
+	{% set taux_tva = 20 %}
+{% endif %}
+
 {% set facture_total_remise = 0 %}
 {% set facture_total_ht = 0 %}
 {% set facture_total_fp = 0 %}
@@ -77,7 +83,7 @@
 					<th class="text-right">Remise</th>
 					<th class="text-right">PU Remisé HT</th>
 					<th class="text-right">Total HT</th>
-					{% if not entity.devis.isTvaIntra %}
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
 					<th class="text-right">Taux TVA</th>
 					<th class="text-right">TVA</th>
 					<th class="text-right">Total TTC</th>
@@ -115,7 +121,7 @@
 					{% set remise_ht = ((prix_ht * dossier_article.remise)/100)|round(2, 'common') %}
 					{% set prix_ht_remise = (prix_ht-remise_ht) %}
 					{% set total_ht = (prix_ht_remise*dossier_article.quantite) %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_remise = facture_total_remise + remise_ht %}
@@ -130,8 +136,8 @@
 					<td class="text-right">{% if dossier_article.remise > 0 %}{{ dossier_article.remise }}%{% endif %}</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht_remise|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -148,7 +154,7 @@
 					{% set remise_ht = ((prix_ht * devis_article.remise)/100)|round(2, 'common') %}
 					{% set prix_ht_remise = (prix_ht-remise_ht) %}
 					{% set total_ht = (prix_ht_remise*devis_article.quantite) %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_remise = facture_total_remise + (remise_ht*devis_article.quantite) %}
@@ -163,8 +169,8 @@
 					<td class="text-right">{% if devis_article.remise > 0 %}{{ devis_article.remise }}%{% endif %}</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht_remise|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -189,7 +195,7 @@
 						{% set remise_ht = ((prix_ht * article_externe_dossier.remise)/100)|round(2, 'common') %}
 						{% set prix_ht_remise = (prix_ht-remise_ht) %}
 						{% set total_ht = (prix_ht_remise*article_externe_dossier.quantite) %}
-						{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+						{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 						{% set total_ttc = (total_ht+tva) %}
 
 						{% set facture_total_remise = facture_total_remise + (remise_ht*article_externe_dossier.quantite) %}
@@ -207,8 +213,8 @@
 						<td class="text-right">{% if article_externe_dossier.remise > 0 %}{{ article_externe_dossier.remise }}%{% endif %}</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht_remise|number_format(2, '.', ',') }} €</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-						{% if not entity.devis.isTvaIntra %}
-						<td class="text-right">20.0%</td>
+						{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+						<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 						{% endif %}
@@ -224,7 +230,7 @@
 						{% set remise_ht = ((prix_ht * article_externe.remise)/100)|round(2, 'common') %}
 						{% set prix_ht_remise = (prix_ht-remise_ht) %}
 						{% set total_ht = (prix_ht_remise*article_externe.quantite) %}
-						{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+						{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 						{% set total_ttc = (total_ht+tva) %}
 
 						{% set facture_total_remise = facture_total_remise + (remise_ht*article_externe.quantite) %}
@@ -240,8 +246,8 @@
 						<td class="text-right">{% if article_externe.remise > 0 %}{{ article_externe.remise }}%{% endif %}</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht_remise|number_format(2, '.', ',') }} €</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-						{% if not entity.devis.isTvaIntra %}
-						<td class="text-right">20.0%</td>
+						{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+						<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 						<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 						{% endif %}
@@ -281,7 +287,7 @@
 
 						{% set prix_ht = dossier_main_oeuvre.mainOeuvre.getPeriodePrix(entity.dateCreation) %}
 						{% set total_ht = (prix_ht*quantite) %}
-						{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+						{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 						{% set total_ttc = (total_ht+tva) %}
 
 						{% set facture_total_ht = facture_total_ht + total_ht %}
@@ -296,8 +302,8 @@
 							<td class="text-right"></td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht|number_format(2, '.', ',') }} €</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-							{% if not entity.devis.isTvaIntra %}
-							<td class="text-right">20.0%</td>
+							{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+							<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 							{% endif %}
@@ -313,7 +319,7 @@
 					{% set remise_ht = ((prix_ht * devis_main_oeuvre.remise)/100)|round(2, 'common') %}
 					{% set prix_ht_remise = (prix_ht-remise_ht) %}
 					{% set total_ht = (prix_ht_remise*devis_main_oeuvre.quantite) %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_remise = facture_total_remise + (remise_ht*devis_main_oeuvre.quantite) %}
@@ -328,8 +334,8 @@
 					<td class="text-right">{% if devis_main_oeuvre.remise > 0 %}{{ devis_main_oeuvre.remise }}%{% endif %}</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht_remise|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -343,7 +349,7 @@
 				{% for dossier_outils in entity.devis.dossier.dossierOutils %}
 					{% set prix_ht = dossier_outils.outillage.outillage.getPeriodePrix(entity.devis.dateCreation) %}
 					{% set total_ht = prix_ht %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_ht = facture_total_ht + total_ht %}
@@ -357,8 +363,8 @@
 					<td class="text-right"></td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -381,7 +387,7 @@
 
 				{% set prix_ht = fdp_piece %}
 				{% set total_ht = prix_ht %}
-				{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+				{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 				{% set total_ttc = (total_ht+tva) %}
 
 				{% set facture_total_fp = facture_total_fp + total_ht %}
@@ -395,8 +401,8 @@
 					<td class="text-right"></td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -422,7 +428,7 @@
 						{% endfor %}
 						{% set prix_ht = dossier_frais_port.fraisPort.getPrixHt %}
 						{% set total_ht = prix_ht %}
-						{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+						{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 						{% set total_ttc = (total_ht+tva) %}
 
 						{% set facture_total_fp = facture_total_fp + total_ht %}
@@ -437,8 +443,8 @@
 							<td class="text-right"></td>
 							<td class="text-right"></td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-							{% if not entity.devis.isTvaIntra %}
-							<td class="text-right">20.0%</td>
+							{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+							<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 							{% endif %}
@@ -451,7 +457,7 @@
 				{% for devis_frais_port in entity.devis.devisFraisPort %}
 					{% set prix_ht = devis_frais_port.fraisPort.getPrixHt %}
 					{% set total_ht = prix_ht %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_fp = facture_total_fp + total_ht %}
@@ -465,8 +471,8 @@
 					<td class="text-right"></td>
 					<td class="text-right"></td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -490,7 +496,7 @@
 
 				{% set prix_ht = fdc_piece %}
 				{% set total_ht = prix_ht %}
-				{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+				{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 				{% set total_ttc = (total_ht+tva) %}
 
 				{% set facture_total_fc = facture_total_fc + total_ht %}
@@ -504,8 +510,8 @@
 					<td class="text-right"></td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -531,7 +537,7 @@
 						{% endfor %}
 						{% set prix_ht = dossier_frais_certif.fraisCertif.getPrixHt %}
 						{% set total_ht = prix_ht %}
-						{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+						{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 						{% set total_ttc = (total_ht+tva) %}
 
 						{% set facture_total_fc = facture_total_fc + total_ht %}
@@ -546,8 +552,8 @@
 							<td class="text-right"></td>
 							<td class="text-right"></td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-							{% if not entity.devis.isTvaIntra %}
-							<td class="text-right">20.0%</td>
+							{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+							<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 							<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 							{% endif %}
@@ -560,7 +566,7 @@
 				{% for devis_frais_certif in entity.devis.devisFraisCertif %}
 					{% set prix_ht = devis_frais_certif.fraisCertif.getPrixHt %}
 					{% set total_ht = prix_ht %}
-					{% set tva = ((total_ht * 20)/100)|round(2, 'common') %}
+					{% set tva = ((total_ht * taux_tva)/100)|round(2, 'common') %}
 					{% set total_ttc = (total_ht+tva) %}
 
 					{% set facture_total_fc = facture_total_fc + total_ht %}
@@ -574,8 +580,8 @@
 					<td class="text-right"></td>
 					<td class="text-right"></td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ht|number_format(2, '.', ',') }} €</td>
-					{% if not entity.devis.isTvaIntra %}
-					<td class="text-right">20.0%</td>
+					{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
+					<td class="text-right">{{ taux_tva|number_format(1, '.', ',') }}%</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ tva|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ total_ttc|number_format(2, '.', ',') }} €</td>
 					{% endif %}
@@ -626,9 +632,9 @@
 					<td class="text-right">{{ facture_total_fp|number_format(2, '.', ',') }} €</td>
 				</tr>
 				{% endif %}
-				{% if not entity.devis.isTvaIntra %}
+				{% if not entity.devis.isTvaIntra and not entity.devis.isNoTva and not entity.devis.isExoTva %}
 				<tr>
-					<th>TVA (20.0%) :</th>
+					<th>TVA ({{ taux_tva|number_format(1, '.', ',') }}%) :</th>
 					<td class="text-right">{% if is_avoir %}- {% endif %}{{ facture_total_tva|number_format(2, '.', ',') }} €</td>
 				</tr>
 				<tr>
@@ -643,6 +649,12 @@
 
 <div class="row invoice-info">
 	<div class="col-xs-12 invoice-col">
-		<p class="facture_bottom">SARL au capital social de 1000€ / 981 539 356 RCS / SIREN 981 539 356 00015 / N° TVA intracommunautaire FR 41 981539356</p>
+		<p class="facture_bottom">
+	{% if entity.devis.isTvaIntra %}Autoliquidation, Article 283-2 du CGI<br/>{% endif %}
+			{% if entity.devis.isNoTva %}TVA non applicable, Article 259-1 du CGI<br/>{% endif %}
+			{% if entity.devis.isExoTva %}Exonération de TVA – Articles 259-1 et 294-1 du CGI<br/>{% endif %}
+			SARL au capital social de 1000€ / 981 539 356 RCS / SIREN 981 539 356 00015 / N° TVA intracommunautaire FR 41 981539356<br/>
+			IBAN FR76 1460 7002 5870 9219 4604 790 / BIC CCBPFRPPMAR
+		</p>
 	</div>
 </div>

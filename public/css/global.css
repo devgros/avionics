@@ -96,3 +96,10 @@ textarea, body.new textarea, body.edit textarea { min-height: 100px !important; 
 .row_title_cri th { border-top:none !important; background:#fff!important; padding:0 !important; }
 #flash-messages .alert{ margin:0 10px; }
 #flash-messages .alert h4 { margin-bottom:0; }
+@media (max-width: 991px) {
+  .navbar-custom-menu .navbar-nav > li > a {
+    padding-top: 10px !important;
+    padding-bottom: 6px !important;
+    line-height: 20px;
+  }
+}

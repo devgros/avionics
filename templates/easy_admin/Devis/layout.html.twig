@@ -30,8 +30,42 @@
 				}
 			});
 
-			$('#devis_is_tva_intra').click(function() {
-			    $("#tva_intra_field").toggle(this.checked);
+			$('#devis_is_tva_intra').change(function() {
+				if($(this).prop("checked")){
+			    	$("#devis_is_exo_tva").prop("checked", false);
+			    	$("#devis_is_8_5_tva").prop("checked", false);
+			    	$("#devis_is_no_tva").prop("checked", false);
+					$("#tva_intra_field").css("display", "block");
+				}else{
+					$("#tva_intra_field").css("display", "none");
+				}
+			});
+
+			$('#devis_is_no_tva').change(function() {
+				if($(this).prop("checked")){
+			    	$("#devis_is_exo_tva").prop("checked", false);
+			    	$("#devis_is_8_5_tva").prop("checked", false);
+			    	$("#devis_is_tva_intra").prop("checked", false);
+					$("#tva_intra_field").css("display", "none");
+				}
+			});
+
+			$('#devis_is_exo_tva').change(function() {
+				if($(this).prop("checked")){
+			    	$("#devis_is_no_tva").prop("checked", false);
+			    	$("#devis_is_8_5_tva").prop("checked", false);
+			    	$("#devis_is_tva_intra").prop("checked", false);
+					$("#tva_intra_field").css("display", "none");
+				}
+			});
+
+			$('#devis_is_8_5_tva').change(function() {
+				if($(this).prop("checked")){
+			    	$("#devis_is_exo_tva").prop("checked", false);
+			    	$("#devis_is_no_tva").prop("checked", false);
+			    	$("#devis_is_tva_intra").prop("checked", false);
+					$("#tva_intra_field").css("display", "none");
+				}
 			});
         });
     </script>
