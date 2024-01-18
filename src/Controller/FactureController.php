@@ -16,9 +16,9 @@ class FactureController extends MyAdminController
         $response = parent::showAction();
 
         //regenerer Facture
-        /*$facture = $this->request->attributes->get('easyadmin')['item'];
+        $facture = $this->request->attributes->get('easyadmin')['item'];
 
-        if($facture->getNumFacture() == "F118-21-AVIONICS"){
+        if($facture->getNumFacture() == "F001-24-AVIONICS"){
 
 	        $path_pdf = $this->container->get('kernel')->getProjectDir().'/public/facture/facture_'.$facture->getNumFacture().'.pdf';
 
@@ -33,7 +33,7 @@ class FactureController extends MyAdminController
 					),
 					$path_pdf
 				);
-		}*/
+		}
 
         return $response;
     }
@@ -165,5 +165,70 @@ class FactureController extends MyAdminController
         }
 
         return $this->render('easy_admin/Facture/export.html.twig', array('form' => $form->createView()));
+    }
+
+	public function exportcsvAction()
+    {
+        $form = $this->createForm(ExportFactureType::class, array());
+        $form->handleRequest($this->request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            /*$fields = $form->getData();
+            $date_export = $fields["month"];
+            $date_export = explode("-", $date_export);
+            $month_export = $date_export[0];
+            $year_export = $date_export[1];
+
+            $factures = $this->getDoctrine()->getRepository(Facture::class)->getFactureByMonth($month_export, $year_export);
+
+			$data = [
+			    ['Num facture', 'Total HT', 'Total TTC'],
+			];
+			$totauxHT = 0;
+			$totauxTTC = 0;
+
+			foreach($factures as $facture){
+				dump($facture);
+				$num_facture = $facture->getNumFacture();
+				$totalHT=0;
+				$totalTTC=0;
+				$data[] = [$num_facture, $totalHT, $totalTTC];
+            }
+
+			dump($data);
+			*/
+			/*
+            $files = [];
+
+            foreach($factures as $facture){
+                $path_pdf = $this->container->get('kernel')->getProjectDir().'/public/facture/facture_'.$facture->getNumFacture().'.pdf';
+                array_push($files, $path_pdf);
+            }
+
+            $zipName = $this->container->get('kernel')->getProjectDir().'/public/facture/AVIONICS_factures-'.$year_export.'-'.$month_export.'.zip';
+
+            $zip = new \ZipArchive();
+            if ($zip->open($zipName, \ZIPARCHIVE::CREATE | \ZIPARCHIVE::OVERWRITE) === TRUE) {
+                foreach ($files as $file) {
+                    if (file_exists($file)) {
+                        $filename = explode('/', $file);
+                        $zip->addFile($file, end($filename));
+                    }
+                }
+                $zip->close();
+            }
+
+            $response = new Response(file_get_contents($zipName));
+            $response->headers->set('Content-Type', 'application/zip');
+            $response->headers->set('Content-Disposition', 'attachment;filename="AVIONICS_factures-'.$year_export.'-'.$month_export.'.zip"');
+            $response->headers->set('Content-length', filesize($zipName));
+
+            unlink($zipName);
+
+            return $response;
+			*/
+        }
+
+        return $this->render('easy_admin/Facture/exportcsv.html.twig', array('form' => $form->createView()));
     }
 }
