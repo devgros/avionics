@@ -16,7 +16,7 @@ class FactureController extends MyAdminController
         $response = parent::showAction();
 
         //regenerer Facture
-        /*$facture = $this->request->attributes->get('easyadmin')['item'];
+        $facture = $this->request->attributes->get('easyadmin')['item'];
 
         if($facture->getNumFacture() == "F001-24-AVIONICS"){
 
@@ -29,11 +29,11 @@ class FactureController extends MyAdminController
 			$this->container->get('knp_snappy.pdf')->generateFromHtml(
 					$this->renderView(
 						'easy_admin/Facture/pdf_facture.html.twig',
-						array('entity' => $facture)
+						array('entity' => $facture, 'is_avoir' => false)
 					),
 					$path_pdf
 				);
-		}*/
+		}
 
         return $response;
     }
