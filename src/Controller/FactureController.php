@@ -16,7 +16,7 @@ class FactureController extends MyAdminController
         $response = parent::showAction();
 
         //regenerer Facture
-        $facture = $this->request->attributes->get('easyadmin')['item'];
+        /*$facture = $this->request->attributes->get('easyadmin')['item'];
 
         if($facture->getNumFacture() == "F001-24-AVIONICS"){
 
@@ -33,7 +33,7 @@ class FactureController extends MyAdminController
 					),
 					$path_pdf
 				);
-		}
+		}*/
 
         return $response;
     }
