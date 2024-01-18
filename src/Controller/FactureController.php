@@ -18,7 +18,7 @@ class FactureController extends MyAdminController
         //regenerer Facture
         $facture = $this->request->attributes->get('easyadmin')['item'];
 
-        if($facture->getNumFacture() == "F001-24-AVIONICS"){
+        if($facture->getNumFacture() == "F002-24-AVIONICS"){
 
 	        $path_pdf = $this->container->get('kernel')->getProjectDir().'/public/facture/facture_'.$facture->getNumFacture().'.pdf';
 
