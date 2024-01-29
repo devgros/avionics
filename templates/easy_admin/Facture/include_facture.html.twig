@@ -640,6 +640,12 @@
 					<th>Total TTC :</th>
 					<td class="text-right"><b>{% if is_avoir %}- {% endif %}{{ facture_total_ttc|number_format(2, '.', ',') }} €</b></td>
 				</tr>
+				{% else %}
+				{% set facture_total_tva_intra = facture_total_ht + facture_total_fp + facture_total_fc %}
+				<tr>
+					<th>Total :</th>
+					<td class="text-right"><b>{{ facture_total_tva_intra|number_format(2, '.', ',') }} €</b></td>
+				</tr>
 				{% endif %}
 			</table>
 		</div>
