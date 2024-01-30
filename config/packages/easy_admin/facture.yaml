@@ -14,8 +14,10 @@ easy_admin:
                     - { property: 'appareil', label: 'Appareil'}
                     - { property: 'dossierTitre', label: 'Titre du dossier'}
                     - { property: 'client', label: 'Client'}
-                    - { property: 'facture_paye', label: 'Payée ?', type: 'toggle' }
-                    - { property: 'paiement_liquide', label: 'En liquide ?', type: 'toggle' }
+                    - { property: 'facture_paye', label: 'Payée', type: 'toggle' }
+                    - { property: 'paiement_liquide', label: 'Liquide', type: 'toggle' }
+                    - { property: 'paiement_cheque', label: 'Chèque', type: 'toggle' }
+                    - { property: 'paiement_virement', label: 'Virement', type: 'toggle' }
                 actions:
                     - { name: 'show', icon: 'search', label: false }
                     - { name: 'addAvoir', icon: 'plus-circle', label: "Avoir" }

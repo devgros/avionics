@@ -65,6 +65,16 @@ class Facture
      */
     private $date_avoir;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $paiement_cheque;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $paiement_virement;
+
 
     public function __toString()
     {
@@ -282,6 +292,30 @@ class Facture
     public function setDateAvoir(?\DateTimeInterface $date_avoir): self
     {
         $this->date_avoir = $date_avoir;
+
+        return $this;
+    }
+
+    public function getPaiementCheque(): ?bool
+    {
+        return $this->paiement_cheque;
+    }
+
+    public function setPaiementCheque(bool $paiement_cheque): self
+    {
+        $this->paiement_cheque = $paiement_cheque;
+
+        return $this;
+    }
+
+    public function getPaiementVirement(): ?bool
+    {
+        return $this->paiement_virement;
+    }
+
+    public function setPaiementVirement(bool $paiement_virement): self
+    {
+        $this->paiement_virement = $paiement_virement;
 
         return $this;
     }
