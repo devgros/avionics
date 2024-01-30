@@ -17,7 +17,7 @@ class ExportFactureType extends AbstractType
 		$current_month = date("m");
 		$month_list = array("12" => "Décembre", "11" => "Novembre", "10" => "Octobre", "09" => "Septembre", "08" => "Août", "07" => "Juillet", "06" => "Juin", "05" => "Mai", "04" => "Avril", "03" => "Mars", "02" => "Février", "01" => "Janvier"
                 );
-		$yearArray = range($current_year, 2018);
+		$yearArray = range($current_year, 2024);
 		$choice = array();
 		foreach ($yearArray as $year) {
 	            foreach ($month_list as $key_month=>$month) {
@@ -35,9 +35,9 @@ class ExportFactureType extends AbstractType
 	            	}
 			    }
 	    }
-	    
+
 	    $builder->add('month', ChoiceType::class, array(
-	    	'label' => false, 
+	    	'label' => false,
 	        'choices'  => $choice,
 	        'data' => '18-04'
 	    ));

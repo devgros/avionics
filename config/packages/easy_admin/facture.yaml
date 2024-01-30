@@ -7,7 +7,7 @@ easy_admin:
             list:
                 role: ROLE_SUPER_ADMIN
                 title: "Factures"
-                fields: 
+                fields:
                     - { property: 'num_facture', label: 'N° facture'}
                     - { property: 'devis', label: 'Proforma', searchField: ['num_devis']}
                     - { property: 'dossier', label: 'Dossier'}

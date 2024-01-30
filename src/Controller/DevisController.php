@@ -90,7 +90,7 @@ class DevisController extends MyAdminController
 				$new_num = 'F'.str_pad(($last_num+1), 3, "0", STR_PAD_LEFT)."-".$current_year."-AVIONICS";
 			}
 		}else{
-			$new_num = "F247-".date("y")."-AVIONICS";
+			$new_num = "F001-".date("y")."-AVIONICS";
 		}
 		$facture->setNumFacture($new_num);
 		$facture->setDevis($entity);
@@ -194,7 +194,7 @@ class DevisController extends MyAdminController
 	        	'label' => "Main d'oeuvre à ajouter",
 	        	'required' => false,
 	        	//'help' => "Cocher les articles à prendre en compte pour ce pro format",
-	        	//'choice_label' => 'id', 
+	        	//'choice_label' => 'id',
 	        	'multiple' => true, 'expanded' => true,
 	            'query_builder' => function (EntityRepository $er) use ( $dossier_id ) {
 	                return $er->createQueryBuilder('da')
