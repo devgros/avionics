@@ -719,7 +719,13 @@
 		</div>
 	</div>
 </div>
-
+{% if entity.dateValidite %}
+<div class="row">
+	<div class="col-xs-12">
+		<span class="pull-right" style="font-weight: 400; color:#666;">Date de validité: {{ entity.dateValidite|date('d/m/Y') }}</span>
+	</div>
+</div>
+{% endif %}
 <div class="row invoice-info">
 	<div class="col-xs-12 invoice-col">
 		<p class="facture_bottom">

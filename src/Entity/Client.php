@@ -85,6 +85,11 @@ class Client
      */
     private $todos;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $info;
+
     public function __construct()
     {
         $this->appareils = new ArrayCollection();
@@ -499,4 +504,17 @@ class Client
     {
         return $this->todos;
     }
+
+    public function getInfo(): ?string
+    {
+        return $this->info;
+    }
+
+    public function setInfo(?string $info): self
+    {
+        $this->info = $info;
+
+        return $this;
+    }
+
 }

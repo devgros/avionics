@@ -139,6 +139,11 @@ class Devis
      */
     private $is_8_5_tva;
 
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $date_validite;
+
     public function __toString()
     {
         return $this->num_devis;
@@ -880,5 +885,17 @@ class Devis
             }
         }
         return $fdc_piece_total;
+    }
+
+    public function getDateValidite(): ?\DateTimeInterface
+    {
+        return $this->date_validite;
+    }
+
+    public function setDateValidite(?\DateTimeInterface $date_validite): self
+    {
+        $this->date_validite = $date_validite;
+
+        return $this;
     }
 }

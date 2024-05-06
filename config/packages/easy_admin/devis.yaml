@@ -41,7 +41,8 @@ easy_admin:
                     #- { type: 'group', css_class: 'col-sm-12', label: 'Informations générales', background: 'box-success' }
                     - { property: 'client', label: "Client", css_class: 'col-sm-6'}
                     - { property: 'dossier', label: "Dossier", css_class: 'col-sm-6'}
-                    - { property: 'commentaire', label: "Observation", css_class: 'col-sm-12'}
+                    - { property: 'commentaire', label: "Observation", css_class: 'col-sm-6'}
+                    - { property: 'date_validite', label: "Date de validité", type_options: { widget: 'single_text' }, css_class: 'col-sm-6'}
                     - { property: 'is_tva_intra', label: "TVA intracommunautaire", css_class: 'col-sm-6'}
                     - { property: 'num_tva_intra', label: "Numéro de TVA intracommunautaire", css_class: 'col-sm-6'}
                     - { property: 'is_no_tva', label: "TVA non applicable (hors UE ou COM)", css_class: 'col-sm-4'}

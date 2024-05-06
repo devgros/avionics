@@ -23,6 +23,7 @@ easy_admin:
                     - { property: 'cp', label: 'Code postal', css_class: 'col-sm-2'}
                     - { property: 'ville', label: 'Ville', css_class: 'col-sm-2'}
                     - { property: 'pays', label: 'Pays', default: 'France', css_class: 'col-sm-2'}
+                    - { property: 'info', label: 'Informations supplémentaires', css_class: 'col-sm-6'}
 
             edit:
                 role: ROLE_SUPER_ADMIN
