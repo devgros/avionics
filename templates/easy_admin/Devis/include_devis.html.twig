@@ -128,7 +128,7 @@
 					{% set facture_total_ttc = facture_total_ttc + total_ttc %}
 				<tr>
 					<td>{{ dossier_article.articleFormone.sn }}</td>
-					<td>{{ dossier_article.articleFormone.article.nom }}</td>
+					<td style="white-space: normal !important;">{{ dossier_article.articleFormone.article.nom }}</td>
 					<td class="text-right">{{ dossier_article.quantite }}</td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if dossier_article.remise > 0 %}{{ dossier_article.remise }}%{% endif %}</td>
@@ -166,7 +166,7 @@
 						{% endif %}
 						{{ devis_article.articleFormone.sn }}
 					</td>
-					<td>{{ devis_article.articleFormone.article.nom }}</td>
+					<td style="white-space: normal !important;">{{ devis_article.articleFormone.article.nom }}</td>
 					<td class="text-right">{{ devis_article.quantite }}</td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if devis_article.remise > 0 %}{{ devis_article.remise }}%{% endif %}</td>
@@ -209,7 +209,7 @@
 					<td>
 						{{ article_externe_dossier.pn }}
 					</td>
-					<td>{{ article_externe_dossier.nom }}</td>
+					<td style="white-space: normal !important;">{{ article_externe_dossier.nom }}</td>
 					<td class="text-right">{{ article_externe_dossier.quantite }}</td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if article_externe_dossier.remise > 0 %}{{ article_externe_dossier.remise }}%{% endif %}</td>
@@ -246,7 +246,7 @@
 						{% endif %}
 						{{ article_externe.ref }}
 					</td>
-					<td>{{ article_externe.nom }}</td>
+					<td style="white-space: normal !important;">{{ article_externe.nom }}</td>
 					<td class="text-right">{{ article_externe.quantite }}</td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if article_externe.remise > 0 %}{{ article_externe.remise }}%{% endif %}</td>
@@ -313,7 +313,7 @@
 						{% if quantite > 0 %}
 						<tr>
 							<td></td>
-							<td>{{ dossier_main_oeuvre.mainOeuvre }}</td>
+							<td style="white-space: normal !important;">{{ dossier_main_oeuvre.mainOeuvre }}</td>
 							<td class="text-right">{{ quantite|number_format(2, '.', ',') }}</td>
 							<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 							<td class="text-right"></td>
@@ -348,7 +348,7 @@
 					<td>
 						{% if not pdf and entity.statut == 0 %}<a href="{{ path('easyadmin', { action: 'edit', entity: 'DevisMainOeuvre', primary_key_name: 'id', id: devis_main_oeuvre.id, referer: '' }) }}" class="btn btn-xs btn-secondary"><i class="fa fa-pencil"></i></a><a class="btn btn-xs btn-secondary text-danger delete-line" title="" href="{{ path('easyadmin', { action: 'delete', entity: 'DevisMainOeuvre', primary_key_name: 'id', id: devis_main_oeuvre.id, referer: '' }) }}" target="_self" data-id="{{ devis_main_oeuvre.id }}" data-entity="DevisMainOeuvre" ><i class="fa fa-times"></i> </a>{% endif %}
 					</td>
-					<td>{{ devis_main_oeuvre.mainOeuvre }}</td>
+					<td style="white-space: normal !important;">{{ devis_main_oeuvre.mainOeuvre }}</td>
 					<td class="text-right">{{ devis_main_oeuvre.quantite }}</td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right">{% if devis_main_oeuvre.remise > 0 %}{{ devis_main_oeuvre.remise }}%{% endif %}</td>
@@ -384,7 +384,7 @@
 					{% set facture_total_ttc = facture_total_ttc + total_ttc %}
 				<tr>
 					<td></td>
-					<td>{{ dossier_outils.outillage.outillage }}</td>
+					<td style="white-space: normal !important;">{{ dossier_outils.outillage.outillage }}</td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right"></td>
@@ -428,7 +428,7 @@
 				{% set facture_total_ttc = facture_total_ttc + total_ttc %}
 				<tr>
 					<td></td>
-					<td>Frais de port des pièces</td>
+					<td style="white-space: normal !important;">Frais de port des pièces</td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right"></td>
@@ -471,7 +471,7 @@
 
 						<tr>
 							<td></td>
-							<td>{{ dossier_frais_port.fraisPort.designation }}</td>
+							<td style="white-space: normal !important;">{{ dossier_frais_port.fraisPort.designation }}</td>
 							<td class="text-right"></td>
 							<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 							<td class="text-right"></td>
@@ -505,7 +505,7 @@
 							<a class="btn btn-xs btn-secondary text-danger delete-line" title="" href="{{ path('easyadmin', { action: 'delete', entity: 'FraisPort', primary_key_name: 'id', id: devis_frais_port.fraisPort.id, devis_id: entity.id, referer: '' }) }}" target="_self" data-id="{{ devis_frais_port.fraisPort.id }}" data-entity="FraisPort" ><i class="fa fa-times"></i> </a>
 						{% endif %}
 					</td>
-					<td>{{ devis_frais_port.fraisPort.designation }}</td>
+					<td style="white-space: normal !important;">{{ devis_frais_port.fraisPort.designation }}</td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right"></td>
@@ -556,7 +556,7 @@
 				{% set facture_total_ttc = facture_total_ttc + total_ttc %}
 				<tr>
 					<td></td>
-					<td>Frais de certification des pièces</td>
+					<td style="white-space: normal !important;">Frais de certification des pièces</td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right"></td>
@@ -599,7 +599,7 @@
 
 						<tr>
 							<td></td>
-							<td>{{ dossier_frais_certif.fraisCertif.designation }}</td>
+							<td style="white-space: normal !important;">{{ dossier_frais_certif.fraisCertif.designation }}</td>
 							<td class="text-right"></td>
 							<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 							<td class="text-right"></td>
@@ -633,7 +633,7 @@
 							<a class="btn btn-xs btn-secondary text-danger delete-line" title="" href="{{ path('easyadmin', { action: 'delete', entity: 'FraisCertif', primary_key_name: 'id', id: devis_frais_certif.fraisCertif.id, devis_id: entity.id, referer: '' }) }}" target="_self" data-id="{{ devis_frais_certif.fraisCertif.id }}" data-entity="FraisCertif" ><i class="fa fa-times"></i> </a>
 						{% endif %}
 					</td>
-					<td>{{ devis_frais_certif.fraisCertif.designation }}</td>
+					<td style="white-space: normal !important;">{{ devis_frais_certif.fraisCertif.designation }}</td>
 					<td class="text-right"></td>
 					<td class="text-right">{{ prix_ht|number_format(2, '.', ',') }} €</td>
 					<td class="text-right"></td>
